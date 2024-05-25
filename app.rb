@@ -7,6 +7,7 @@ get '/' do
 end
 
 get '/about' do
+	@error = 'Something wrong!'
 	erb :about
 end
 
@@ -24,6 +25,11 @@ post '/visit' do
 	@datetime = params[:datetime]
 	@persons = params[:persons]
 	@color = params[:color]
+
+	if @username == ''
+		@error = 'Введите имя'
+		return erb :visit
+	end
 
 	@title = 'Спасибо!'
 	@message = "Уважаемый #{@username}, #{@phone}, мы вас ждём #{@datetime}, ваш парикмахер #{@persons}, выбранный цвет окраски волос: #{@color}"
